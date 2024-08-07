@@ -79,8 +79,8 @@ const StepOne = () => {
       {/* WEBSITE URL */}
       <div className="flex flex-col gap-[6px]">
         <FormLabel text="Website URL" htmlFor="website-url" />
-        <div className="flex items-center w-full">
-          <span className="border text-sm bg-gray-50 border-gray-border text-gray-placeholder py-[10px] px-[12px] rounded-tl-lg rounded-bl-lg max-w-[69px]">
+        <div className="flex items-center w-full border border-gray-border shadow-sm rounded-lg">
+          <span className="border-r text-sm bg-gray-50 border-gray-border text-gray-placeholder py-[10px] px-[12px] rounded-tl-lg rounded-bl-lg max-w-[69px]">
             https:
           </span>
           <Input
@@ -90,6 +90,7 @@ const StepOne = () => {
             name="websiteURL"
             onChange={(e) => handleFormChange(e, FORMSTEP)}
             value={formData[FORMSTEP].websiteURL}
+            className="w-full h-full bg-white text-gray-placeholder py-[10px] px-[12px] rounded-none rounded-tr-lg rounded-br-lg"
           />
         </div>
       </div>
