@@ -25,17 +25,6 @@ const VendorEmailVerification: React.FC = () => {
               </span>
             </PageSubTitle>
           </div>
-          <img src="/svgs/email.svg" alt="email" />
-          <div className="flex flex-col items-center">
-            <PageTitle text="Email Verification" />
-            <PageSubTitle>
-              Please, enter the code sent to{" "}
-              <span className="text-blue-link2">
-                {(location.state.email && censorEmail(location.state.email)) ||
-                  ""}
-              </span>
-            </PageSubTitle>
-          </div>
           <OTPInput />
           <AuthPrompt
             text="Didn't receive the email?"

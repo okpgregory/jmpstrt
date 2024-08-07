@@ -70,19 +70,19 @@ const InputField: React.FC<InputFieldProps> = ({
           onChange={onChange}
           placeholder={placeholder}
         />
-        {type === "password" &&
-          (!isError ? (
-            <ShowIcon
-              shown={showPassword}
-              className="absolute text-gray-4 right-3 top-1/2 -translate-y-1/2"
-              onClick={() => setShowPassword(!showPassword)}
-            />
-          ) : (
-            <CircleAlert
-              size={16}
-              className="absolute text-red-error right-3 top-1/2 -translate-y-1/2"
-            />
-          ))}
+        {type === "password" && (
+          <button className="absolute flex items-center justify-center right-3 top-1/2 -translate-y-1/2">
+            {!isError ? (
+              <ShowIcon
+                shown={showPassword}
+                className="text-gray-4"
+                onClick={() => setShowPassword(!showPassword)}
+              />
+            ) : (
+              <CircleAlert size={16} className="text-red-error" />
+            )}
+          </button>
+        )}
       </div>
     </div>
   );
