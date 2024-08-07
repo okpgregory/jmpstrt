@@ -1,14 +1,13 @@
 import { CircleAlert, Eye, EyeOff } from "lucide-react";
 import React, { useState } from "react";
 import { cn } from "../../../lib/utils";
-import RequiredIndicator from "../ui/requiredIndicator";
-import FormLabel from "./FormLabel";
 import { Input } from "../ui/input";
+import FormLabel from "./FormLabel";
 // HTMLInputTypeAttribute
 
 interface InputFieldProps {
   label: string;
-  type: "text" | "password" | "email";
+  type: "text" | "password" | "email" | "url";
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   name: string;

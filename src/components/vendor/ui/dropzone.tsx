@@ -10,10 +10,11 @@ interface MyFile extends File {
 interface DropzoneProps {
   file: MyFile | null;
   setFile: React.Dispatch<React.SetStateAction<MyFile | null>>;
+  label: string;
   isImageIncluded?: boolean;
 }
 
-const Dropzone = ({ isImageIncluded, file, setFile }: DropzoneProps) => {
+const Dropzone = ({ isImageIncluded, file, setFile, label }: DropzoneProps) => {
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       if (!isImageIncluded && acceptedFiles[0].type === "image/jpeg") return;
@@ -42,7 +43,7 @@ const Dropzone = ({ isImageIncluded, file, setFile }: DropzoneProps) => {
           id: "file",
         })}
       />
-      <FormLabel text="Registration Document" htmlFor="file" />
+      <FormLabel text={label} htmlFor="file" />
       <div className="w-full py-4 px-6 rounded-xl h-[137px] min-w-[445px] mt-[6px] bg-white border border-gray-border flex flex-col items-center justify-center">
         {!file ? (
           <div className="flex flex-col items-center justify-center gap-4">
@@ -52,7 +53,9 @@ const Dropzone = ({ isImageIncluded, file, setFile }: DropzoneProps) => {
                 <span className="text-blue-1">Click to upload</span> or drag and
                 drop
               </p>
-              <p className="leading-[19.6px]">.pdf (max. 1MB)</p>
+              <p className="leading-[19.6px]">
+                .pdf {isImageIncluded && ".Jpeg"} (max. 1MB)
+              </p>
             </div>
           </div>
         ) : (

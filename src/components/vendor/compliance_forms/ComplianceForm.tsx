@@ -1,32 +1,66 @@
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import ProgressBar from "../auth/ProgressBar";
-import PageTitleTwo from "../shared/PageTitleTwo";
-import { Form } from "../ui/form";
 import Button from "../shared/Button";
+import PageTitleTwo from "../shared/PageTitleTwo";
 import StepOne from "./StepOne";
-import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
-import { z } from "zod";
-import { useForm, FormProvider } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { complianceFormSchema } from "./schemas";
+import StepTwo from "./StepTwo";
+import { FormContextType } from "../../../types";
+
+export const FormContext = createContext({} as FormContextType);
 
 const ComplianceForm = () => {
   const [step, setStep] = useState(1);
-
-  const form = useForm<z.infer<typeof complianceFormSchema>>({
-    resolver: zodResolver(complianceFormSchema),
-    defaultValues: {
+  const [formData, setFormData] = useState({
+    StepOne: {
       businessType: "",
       businessName: "",
       companyRegistrationNumber: "",
       websiteURL: "",
     },
+    StepTwo: {
+      businessOwnerFullName: "",
+      contactAddress: "",
+      nationalIdentityNumber: "",
+      phoneNumber: "",
+      emailAddress: "",
+    },
+    StepThree: {
+      bankName: "",
+      bankAccountNumber: "",
+    },
   });
 
-  const onSubmit = (values: z.infer<typeof complianceFormSchema>) => {
-    console.log(values);
+  const handleFormChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    step: string
+  ) => {
+    const { name, value } = e.target;
+    switch (step) {
+      case "StepOne":
+        setFormData({
+          ...formData,
+          StepOne: { ...formData.StepOne, [name]: value },
+        });
+        break;
+      case "StepTwo":
+        setFormData({
+          ...formData,
+          StepTwo: { ...formData.StepTwo, [name]: value },
+        });
+        break;
+      case "StepThree":
+        setFormData({
+          ...formData,
+          StepThree: { ...formData.StepThree, [name]: value },
+        });
+        break;
+      default:
+        break;
+    }
   };
+
+  const onSubmit = (e: React.FormEvent) => {};
 
   const StepTitles = [
     "Business Information",
@@ -59,20 +93,18 @@ const ComplianceForm = () => {
         />
         <PageTitleTwo text={StepTitles[step - 1]} />
       </div>
-      <FormProvider {...form}>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            <>{DisplayedStep()}</>
-            <Button
-              className="w-full mt-6"
-              onClick={handleProceed}
-              type={step === StepTitles.length ? "submit" : "button"}
-            >
-              Proceed
-            </Button>
-          </form>
-        </Form>
-      </FormProvider>
+      <FormContext.Provider value={{ formData, handleFormChange }}>
+        <form onSubmit={onSubmit}>
+          <>{DisplayedStep()}</>
+          <Button
+            className="w-full mt-6"
+            onClick={handleProceed}
+            type={step === StepTitles.length ? "submit" : "button"}
+          >
+            Proceed
+          </Button>
+        </form>
+      </FormContext.Provider>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { FormLabel as Label } from "../ui/form";
+import { Label } from "../ui/label";
 import RequiredIndicator from "../ui/requiredIndicator";
 
 const FormLabel = ({ text, htmlFor }: { text: string; htmlFor?: string }) => {
