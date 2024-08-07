@@ -11,6 +11,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import { FormContext } from "./ComplianceForm";
+import { Input } from "../ui/input";
 
 const selectFields = [
   { label: "Business Name", value: "business-name" },
@@ -28,7 +29,7 @@ const StepOne = () => {
   return (
     <div className="space-y-3">
       {/* BUSINESS TYPE */}
-      <div>
+      <div className="flex flex-col gap-[6px]">
         <FormLabel text="Business Type" />
         <Select
           onValueChange={(e) => console.log(e)}
@@ -76,18 +77,21 @@ const StepOne = () => {
       <Dropzone file={file} setFile={setFile} label="Registration Document" />
 
       {/* WEBSITE URL */}
-      <div className="flex items-center">
-        <span className="border text-sm bg-gray-50 border-gray-border text-gray-placeholder py-[10px] px-[12px] rounded-tl-lg rounded-bl-lg max-w-[69px]">
-          https:
-        </span>
-        <InputField
-          type="url"
-          placeholder="www.example.com"
-          label="Website URL"
-          name="websiteURL"
-          onChange={(e) => handleFormChange(e, FORMSTEP)}
-          value={formData[FORMSTEP].websiteURL}
-        />
+      <div className="flex flex-col gap-[6px]">
+        <FormLabel text="Website URL" htmlFor="website-url" />
+        <div className="flex items-center w-full">
+          <span className="border text-sm bg-gray-50 border-gray-border text-gray-placeholder py-[10px] px-[12px] rounded-tl-lg rounded-bl-lg max-w-[69px]">
+            https:
+          </span>
+          <Input
+            id="website-url"
+            type="url"
+            placeholder="www.example.com"
+            name="websiteURL"
+            onChange={(e) => handleFormChange(e, FORMSTEP)}
+            value={formData[FORMSTEP].websiteURL}
+          />
+        </div>
       </div>
     </div>
   );
