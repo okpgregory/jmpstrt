@@ -59,10 +59,10 @@ const App: React.FC = () => {
                     <Route path="support" element={<UserSupport />} />
                   </Route>
                   <Route path="/vendor/dashboard" element={<VendorDashboard />}>
-                    <Route
+                    {/* <Route
                       path="/vendor/dashboard/"
                       element={<VendorDashboard />}
-                    />
+                    /> */}
                     <Route path="services" element={<VendorServices />} />
                     <Route
                       path="transactions"
